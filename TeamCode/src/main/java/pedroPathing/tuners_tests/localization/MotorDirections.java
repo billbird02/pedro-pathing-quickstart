@@ -36,6 +36,8 @@ public class MotorDirections extends OpMode {
     private DcMotorEx rightRear;
     private List<DcMotorEx> motors;
 
+    private double speedLimiter = 0.5;
+
     @Override
     public void init() {
         Constants.setConstants(FConstants.class, LConstants.class);
@@ -75,29 +77,29 @@ public class MotorDirections extends OpMode {
         rightRear.setDirection(rightRearMotorDirection);
 
         if(gamepad1.a)
-            leftFront.setPower(1);
+            leftFront.setPower(1 * speedLimiter);
         else
             leftFront.setPower(0);
 
         if(gamepad1.y)
-            leftRear.setPower(1);
+            leftRear.setPower(1 * speedLimiter);
         else
             leftRear.setPower(0);
 
         if(gamepad1.b)
-            rightFront.setPower(1);
+            rightFront.setPower(1 * speedLimiter);
         else
             rightFront.setPower(0);
 
         if(gamepad1.x)
-            rightRear.setPower(1);
+            rightRear.setPower(1 * speedLimiter);
         else
             rightRear.setPower(0);
 
-        telemetryA.addLine("Press A to spin the left front motor at 100% power");
-        telemetryA.addLine("Press Y to spin the left rear motor at 100% power");
-        telemetryA.addLine("Press B to spin the right front motor at 100% power");
-        telemetryA.addLine("Press X to spin the right rear motor at 100% power");
+        telemetryA.addLine("Press A (PS4: X) to spin the left front motor");   // A or PS4: X (cross)
+        telemetryA.addLine("Press Y (PS4: ∆) to spin the left rear motor");    // Y or PS4: ∆ (triangle)
+        telemetryA.addLine("Press B (PS4: O) to spin the right front motor");  // B or PS4: O (circle)
+        telemetryA.addLine("Press X (PS4: □) to spin the right rear motor");   // X or PS4: □ (square)
         telemetryA.addData("Left Front Motor Direction: ", leftFrontMotorDirection);
         telemetryA.addData("Left Rear Motor Direction: ", leftRearMotorDirection);
         telemetryA.addData("Right Front Motor Direction: ", rightFrontMotorDirection);
